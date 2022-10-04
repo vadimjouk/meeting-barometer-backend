@@ -24,9 +24,7 @@ public class Application {
 		LOG.info(sysenvs);
 
 		if (StringUtils.isBlank(System.getenv(Properties.GCP_PROJECT_ID))) {
-			LOG.error("Missing enviroment variable {}", Properties.GCP_PROJECT_ID);
-			return false;
-
+			LOG.warn("Missing enviroment variable {}", Properties.GCP_PROJECT_ID);
 		}
 		if (StringUtils.isBlank(System.getenv(Properties.GOOGLE_APPLICATION_CREDENTIALS))) {
 			LOG.warn("Missing enviroment variable {}", Properties.GOOGLE_APPLICATION_CREDENTIALS);

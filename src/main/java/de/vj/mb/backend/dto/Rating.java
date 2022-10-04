@@ -1,9 +1,21 @@
 package de.vj.mb.backend.dto;
 
-public class Feedback {
+import com.google.cloud.firestore.annotation.DocumentId;
+
+public class Rating {
+	@DocumentId
+	private String id;
 	private String userId;
 	private String meetingId;
 	private int rating;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getUserId() {
 		return this.userId;
