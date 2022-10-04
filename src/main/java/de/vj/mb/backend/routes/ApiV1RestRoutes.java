@@ -21,7 +21,8 @@ public class ApiV1RestRoutes extends RouteBuilder {
 				.apiProperty("api.title", "Meeting Barometer API").apiProperty("api.version", "1")//
 				.apiProperty("swagger.version", "2").apiProperty("cors", "true").enableCORS(true).corsAllowCredentials(true)
 				.corsHeaderProperty("Access-Control-Allow-Headers",
-						"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, Authorization-User");
+						"Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, Authorization-User")
+				.corsHeaderProperty("Access-Control-Allow-Origin", "*");
 
 		this.rest("/api/v1").description("Meeting Barometer Backend").consumes(MediaType.APPLICATION_JSON_VALUE).produces(MediaType.APPLICATION_JSON_VALUE);
 
