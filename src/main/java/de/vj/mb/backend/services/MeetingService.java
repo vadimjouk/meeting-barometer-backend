@@ -18,6 +18,10 @@ public class MeetingService {
 	}
 
 	public String storeRating(Rating rating) throws Exception {
+		Optional<Rating> result = FirestoreService.findObject("rating", "userId", rating.getUserId(), Rating.class);
+		if (result.isPresent()) {
+			rating.setId(result.get().getId());
+		}
 		return FirestoreService.storeObject("ratings", rating);
 	}
 
