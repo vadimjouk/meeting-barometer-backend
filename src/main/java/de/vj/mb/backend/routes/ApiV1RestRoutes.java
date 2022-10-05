@@ -51,7 +51,9 @@ public class ApiV1RestRoutes extends RouteBuilder {
 		this.from("direct:getMeetingById").to("bean:meetingService?method=getMeeting(${headers.meetingId})");
 
 		this.from("direct:listRatingsByMeetingId").to("bean:meetingService?method=getRatings(${headers.meetingId})");
-		this.from("direct:storeRating").to("bean:meetingService?method=storeRating(${body})");
+		this.from("direct:storeRating")
+				.to("bean:meetingService?method=storeRating(${body})")
+				.to("bean:meetingService?method=updateMeeting(${body})");
 
 	}
 }
