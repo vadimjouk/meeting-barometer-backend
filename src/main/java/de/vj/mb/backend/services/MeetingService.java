@@ -48,40 +48,132 @@ public class MeetingService {
 
 	public String updateMeeting(Rating rating) throws Exception {
 		List<Rating> ratings = this.getRatings(rating.getMeetingId());
-		int ratingCount = ratings.size();
-		final Meeting meeting = this.getMeeting(rating.getMeetingId());
-		meeting.setRating1(0);
-		meeting.setRating2(0);
-		meeting.setRating3(0);
-		meeting.setRating4(0);
-		meeting.setRating5(0);
 
+		long ratingOverallCount = ratings.stream().filter(t -> t.getRatingOverall() > 0).count();
+		long ratingInterestCount = ratings.stream().filter(t -> t.getRatingInterest() > 0).count();
+		long ratingUnderstandabilityCount = ratings.stream().filter(t -> t.getRatingUnderstandability() > 0).count();
+		long ratingCostBenefitCount = ratings.stream().filter(t -> t.getRatingCostBenefit() > 0).count();
+
+		final Meeting meeting = this.getMeeting(rating.getMeetingId());
+
+		this.updateOverallRating(ratings, ratingOverallCount, meeting);
+		this.updateInterestRating(ratings, ratingInterestCount, meeting);
+		this.updatUnderstandabilityRating(ratings, ratingUnderstandabilityCount, meeting);
+		this.updateCostBenefitRating(ratings, ratingCostBenefitCount, meeting);
+
+		this.storeMeeting(meeting);
+		return rating.getId();
+	}
+
+	private void updateOverallRating(List<Rating> ratings, long ratingOverallCount, final Meeting meeting) {
 		ratings.forEach(r -> {
-			switch (r.getRating()) {
+			switch (r.getRatingOverall()) {
 				case 1:
-					meeting.setRating1(meeting.getRating1() + 1);
+					meeting.setRatingOverall1(meeting.getRatingOverall1() + 1);
 					break;
 				case 2:
-					meeting.setRating2(meeting.getRating2() + 1);
+					meeting.setRatingOverall2(meeting.getRatingOverall2() + 1);
 					break;
 				case 3:
-					meeting.setRating3(meeting.getRating3() + 1);
+					meeting.setRatingOverall3(meeting.getRatingOverall3() + 1);
 					break;
 				case 4:
-					meeting.setRating4(meeting.getRating4() + 1);
+					meeting.setRatingOverall4(meeting.getRatingOverall4() + 1);
 					break;
 				case 5:
-					meeting.setRating5(meeting.getRating5() + 1);
+					meeting.setRatingOverall5(meeting.getRatingOverall5() + 1);
 					break;
 				default:
 					break;
 			}
 		});
 
-		Double ratingAvg = ratings.stream().mapToInt(r -> r.getRating() * 20).average().orElse(0);
-		meeting.setRatingCount(ratingCount);
-		meeting.setRatingAvg(ratingAvg.intValue());
-		this.storeMeeting(meeting);
-		return rating.getId();
+		Double ratingOverallAvg = ratings.stream().mapToInt(r -> r.getRatingOverall() * 20).average().orElse(0);
+		meeting.setRatingOverallCount(Long.valueOf(ratingOverallCount).intValue());
+		meeting.setRatingOverallAvg(ratingOverallAvg.intValue());
+	}
+
+	private void updateInterestRating(List<Rating> ratings, long ratingInterestCount, final Meeting meeting) {
+		ratings.forEach(r -> {
+			switch (r.getRatingInterest()) {
+				case 1:
+					meeting.setRatingInterest1(meeting.getRatingInterest1() + 1);
+					break;
+				case 2:
+					meeting.setRatingInterest2(meeting.getRatingInterest2() + 1);
+					break;
+				case 3:
+					meeting.setRatingInterest3(meeting.getRatingInterest3() + 1);
+					break;
+				case 4:
+					meeting.setRatingInterest4(meeting.getRatingInterest4() + 1);
+					break;
+				case 5:
+					meeting.setRatingInterest5(meeting.getRatingInterest5() + 1);
+					break;
+				default:
+					break;
+			}
+		});
+
+		Double ratingInterestAvg = ratings.stream().mapToInt(r -> r.getRatingInterest() * 20).average().orElse(0);
+		meeting.setRatingInterestCount(Long.valueOf(ratingInterestCount).intValue());
+		meeting.setRatingInterestAvg(ratingInterestAvg.intValue());
+	}
+
+	private void updatUnderstandabilityRating(List<Rating> ratings, long ratingUnderstandabilityCount, final Meeting meeting) {
+		ratings.forEach(r -> {
+			switch (r.getRatingUnderstandability()) {
+				case 1:
+					meeting.setRatingUnderstandability1(meeting.getRatingUnderstandability1() + 1);
+					break;
+				case 2:
+					meeting.setRatingUnderstandability2(meeting.getRatingUnderstandability2() + 1);
+					break;
+				case 3:
+					meeting.setRatingUnderstandability3(meeting.getRatingUnderstandability3() + 1);
+					break;
+				case 4:
+					meeting.setRatingUnderstandability4(meeting.getRatingUnderstandability4() + 1);
+					break;
+				case 5:
+					meeting.setRatingUnderstandability5(meeting.getRatingUnderstandability5() + 1);
+					break;
+				default:
+					break;
+			}
+		});
+
+		Double ratingUnderstandabilityAvg = ratings.stream().mapToInt(r -> r.getRatingUnderstandability() * 20).average().orElse(0);
+		meeting.setRatingUnderstandabilityCount(Long.valueOf(ratingUnderstandabilityCount).intValue());
+		meeting.setRatingUnderstandabilityAvg(ratingUnderstandabilityAvg.intValue());
+	}
+
+	private void updateCostBenefitRating(List<Rating> ratings, long ratingCostBenefitCount, final Meeting meeting) {
+		ratings.forEach(r -> {
+			switch (r.getRatingCostBenefit()) {
+				case 1:
+					meeting.setRatingCostBenefit1(meeting.getRatingCostBenefit1() + 1);
+					break;
+				case 2:
+					meeting.setRatingCostBenefit2(meeting.getRatingCostBenefit2() + 1);
+					break;
+				case 3:
+					meeting.setRatingCostBenefit3(meeting.getRatingCostBenefit3() + 1);
+					break;
+				case 4:
+					meeting.setRatingCostBenefit4(meeting.getRatingCostBenefit4() + 1);
+					break;
+				case 5:
+					meeting.setRatingCostBenefit5(meeting.getRatingCostBenefit5() + 1);
+					break;
+				default:
+					break;
+			}
+		});
+
+		Double ratingCostBenefitAvg = ratings.stream().mapToInt(r -> r.getRatingCostBenefit() * 20).average().orElse(0);
+		meeting.setRatingCostBenefitCount(Long.valueOf(ratingCostBenefitCount).intValue());
+		meeting.setRatingCostBenefitAvg(ratingCostBenefitAvg.intValue());
 	}
 }

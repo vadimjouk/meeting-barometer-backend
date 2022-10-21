@@ -7,7 +7,10 @@ public class Rating {
 	private String id;
 	private String userId;
 	private String meetingId;
-	private int rating;
+	private int ratingOverall;
+	private int ratingInterest;
+	private int ratingUnderstandability;
+	private int ratingCostBenefit;
 
 	public String getId() {
 		return this.id;
@@ -33,12 +36,36 @@ public class Rating {
 		this.meetingId = meetingId;
 	}
 
-	public int getRating() {
-		return this.rating;
+	public int getRatingOverall() {
+		return this.ratingOverall;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setRatingOverall(int ratingOverall) {
+		this.ratingOverall = ratingOverall;
+	}
+
+	public int getRatingInterest() {
+		return this.ratingInterest;
+	}
+
+	public void setRatingInterest(int ratingInterest) {
+		this.ratingInterest = ratingInterest;
+	}
+
+	public int getRatingUnderstandability() {
+		return this.ratingUnderstandability;
+	}
+
+	public void setRatingUnderstandability(int ratingUnderstandability) {
+		this.ratingUnderstandability = ratingUnderstandability;
+	}
+
+	public int getRatingCostBenefit() {
+		return this.ratingCostBenefit;
+	}
+
+	public void setRatingCostBenefit(int ratingCostBenefit) {
+		this.ratingCostBenefit = ratingCostBenefit;
 	}
 
 }
