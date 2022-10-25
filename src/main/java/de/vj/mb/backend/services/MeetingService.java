@@ -56,20 +56,27 @@ public class MeetingService {
 
 		final Meeting meeting = this.getMeeting(rating.getMeetingId());
 
-		this.updateOverallRating(ratings, ratingOverallCount, meeting);
-		this.updateInterestRating(ratings, ratingInterestCount, meeting);
-		this.updatUnderstandabilityRating(ratings, ratingUnderstandabilityCount, meeting);
-		this.updateCostBenefitRating(ratings, ratingCostBenefitCount, meeting);
+		this.updateOverallRating(ratings, ratingOverallCount, meeting, rating);
+		this.updateInterestRating(ratings, ratingInterestCount, meeting, rating);
+		this.updatUnderstandabilityRating(ratings, ratingUnderstandabilityCount, meeting, rating);
+		this.updateCostBenefitRating(ratings, ratingCostBenefitCount, meeting, rating);
 
 		this.storeMeeting(meeting);
 		return rating.getId();
 	}
 
-	private void updateOverallRating(List<Rating> ratings, long ratingOverallCount, final Meeting meeting) {
+	private void updateOverallRating(List<Rating> ratings, long ratingOverallCount, final Meeting meeting, final Rating rating) {
+		meeting.setRatingOverall1(0);
+		meeting.setRatingOverall2(0);
+		meeting.setRatingOverall3(0);
+		meeting.setRatingOverall4(0);
+		meeting.setRatingOverall5(0);
+
 		ratings.forEach(r -> {
 			switch (r.getRatingOverall()) {
 				case 1:
 					meeting.setRatingOverall1(meeting.getRatingOverall1() + 1);
+
 					break;
 				case 2:
 					meeting.setRatingOverall2(meeting.getRatingOverall2() + 1);
@@ -93,7 +100,13 @@ public class MeetingService {
 		meeting.setRatingOverallAvg(ratingOverallAvg.intValue());
 	}
 
-	private void updateInterestRating(List<Rating> ratings, long ratingInterestCount, final Meeting meeting) {
+	private void updateInterestRating(List<Rating> ratings, long ratingInterestCount, final Meeting meeting, final Rating rating) {
+		meeting.setRatingInterest1(0);
+		meeting.setRatingOverall2(0);
+		meeting.setRatingInterest3(0);
+		meeting.setRatingInterest4(0);
+		meeting.setRatingInterest5(0);
+
 		ratings.forEach(r -> {
 			switch (r.getRatingInterest()) {
 				case 1:
@@ -121,7 +134,13 @@ public class MeetingService {
 		meeting.setRatingInterestAvg(ratingInterestAvg.intValue());
 	}
 
-	private void updatUnderstandabilityRating(List<Rating> ratings, long ratingUnderstandabilityCount, final Meeting meeting) {
+	private void updatUnderstandabilityRating(List<Rating> ratings, long ratingUnderstandabilityCount, final Meeting meeting, final Rating rating) {
+		meeting.setRatingUnderstandability1(0);
+		meeting.setRatingUnderstandability2(0);
+		meeting.setRatingUnderstandability3(0);
+		meeting.setRatingUnderstandability4(0);
+		meeting.setRatingUnderstandability5(0);
+
 		ratings.forEach(r -> {
 			switch (r.getRatingUnderstandability()) {
 				case 1:
@@ -149,7 +168,13 @@ public class MeetingService {
 		meeting.setRatingUnderstandabilityAvg(ratingUnderstandabilityAvg.intValue());
 	}
 
-	private void updateCostBenefitRating(List<Rating> ratings, long ratingCostBenefitCount, final Meeting meeting) {
+	private void updateCostBenefitRating(List<Rating> ratings, long ratingCostBenefitCount, final Meeting meeting, final Rating rating) {
+		meeting.setRatingCostBenefit1(0);
+		meeting.setRatingCostBenefit2(0);
+		meeting.setRatingCostBenefit3(0);
+		meeting.setRatingCostBenefit4(0);
+		meeting.setRatingCostBenefit5(0);
+
 		ratings.forEach(r -> {
 			switch (r.getRatingCostBenefit()) {
 				case 1:
