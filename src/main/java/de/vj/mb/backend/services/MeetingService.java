@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+import de.vj.mb.backend.dto.Comment;
 import de.vj.mb.backend.dto.Meeting;
 import de.vj.mb.backend.dto.Rating;
 import de.vj.mb.backend.firestore.FirestoreService;
@@ -60,6 +61,11 @@ public class MeetingService {
 		this.updateInterestRating(ratings, ratingInterestCount, meeting, rating);
 		this.updatUnderstandabilityRating(ratings, ratingUnderstandabilityCount, meeting, rating);
 		this.updateCostBenefitRating(ratings, ratingCostBenefitCount, meeting, rating);
+
+		Comment comment = new Comment();
+		comment.setMeetingId(meeting.getId());
+		comment.setValue("Test Comment " + rating.toString());
+		meeting.getComments().add(comment);
 
 		this.storeMeeting(meeting);
 		return rating.getId();

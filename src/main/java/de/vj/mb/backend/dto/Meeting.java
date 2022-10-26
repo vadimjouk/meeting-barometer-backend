@@ -1,5 +1,8 @@
 package de.vj.mb.backend.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.cloud.firestore.annotation.DocumentId;
 
 public class Meeting {
@@ -41,6 +44,8 @@ public class Meeting {
 	private int ratingCostBenefit3 = 0;
 	private int ratingCostBenefit4 = 0;
 	private int ratingCostBenefit5 = 0;
+
+	private List<Comment> comments = new ArrayList<>();
 
 	public String getId() {
 		return this.id;
@@ -280,6 +285,14 @@ public class Meeting {
 
 	public void setRatingCostBenefit5(int ratingCostBenefit5) {
 		this.ratingCostBenefit5 = ratingCostBenefit5;
+	}
+
+	public List<Comment> getComments() {
+		return this.comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }
