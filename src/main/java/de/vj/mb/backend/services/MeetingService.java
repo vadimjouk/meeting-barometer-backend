@@ -3,6 +3,7 @@ package de.vj.mb.backend.services;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.StringJoiner;
 
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ public class MeetingService {
 
 	private static final String FS_MEETINGS = "meetings";
 	private static final String FS_RATINGS = "ratings";
+	private static final String FS_COMMENTS = "comments";
 
 	public String storeMeeting(Meeting meeting) throws Exception {
 		return FirestoreService.storeObject(FS_MEETINGS, meeting.getId(), meeting);
@@ -31,9 +33,9 @@ public class MeetingService {
 	}
 
 	public Comment storeComment(String meetingId, Comment comment) throws Exception {
-
 		comment.setMeetingId(meetingId);
-		String id = FirestoreService.storeObject("meetings/" + meetingId + "/comments", comment);
+		String path = new StringJoiner("/").add(FS_MEETINGS).add(meetingId).add(FS_COMMENTS).toString();
+		String id = FirestoreService.storeObject(path, comment);
 		comment.setId(id);
 
 		return comment;

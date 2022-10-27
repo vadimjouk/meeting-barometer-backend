@@ -64,7 +64,7 @@ public class FirestoreService {
 
 		ApiFuture<WriteResult> future = document.set(object);
 
-		LOG.info("Document Id:{} Update time:{} ", document.getId(), future.get().getUpdateTime());
+		LOG.info("Collection/Path:{} | Document Id:{} | Update time:{} ", collection, document.getId(), future.get().getUpdateTime());
 		return document.getId();
 	}
 
