@@ -6,6 +6,7 @@ import org.apache.camel.model.rest.RestParamType;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import de.vj.mb.backend.dto.Comment;
 import de.vj.mb.backend.dto.Meeting;
 import de.vj.mb.backend.dto.Rating;
 
@@ -46,6 +47,13 @@ public class ApiV1RestRoutes extends RouteBuilder {
 				.param().name("meetingId").type(RestParamType.path).description("The id of the Meeting").dataType("String").endParam() //
 				.to("direct:listRatingsByMeetingId");
 
+		this.rest("/api/v1/meetings/{meetingId}/comments").post().description("Post Comment to Meeting")
+				.type(Comment.class)
+				.outType(Comment.class)
+				.param().name("meetingId").type(RestParamType.path).description("The id of the Meeting").dataType("String").endParam() //
+				.param().name("comment").type(RestParamType.body).description("Comment to create").endParam()
+				.to("direct:storeComment");
+
 		this.from("direct:listMeetings").to("bean:meetingService?method=getMeetings");
 		this.from("direct:storeMeeting").to("bean:meetingService?method=storeMeeting(${body})");
 		this.from("direct:getMeetingById").to("bean:meetingService?method=getMeeting(${headers.meetingId})");
@@ -54,6 +62,9 @@ public class ApiV1RestRoutes extends RouteBuilder {
 		this.from("direct:storeRating")
 				.to("bean:meetingService?method=storeRating(${body})")
 				.to("bean:meetingService?method=updateMeeting(${body})");
+
+		this.from("direct:storeComment")
+				.to("bean:meetingService?method=storeComment(${headers.meetingId}, ${body})");
 
 	}
 }

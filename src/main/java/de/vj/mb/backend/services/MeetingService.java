@@ -30,6 +30,15 @@ public class MeetingService {
 		return rating;
 	}
 
+	public Comment storeComment(String meetingId, Comment comment) throws Exception {
+
+		comment.setMeetingId(meetingId);
+		String id = FirestoreService.storeObject("meetings/" + meetingId + "/comments", comment);
+		comment.setId(id);
+
+		return comment;
+	}
+
 	public List<Meeting> getMeetings() throws Exception {
 		return FirestoreService.findAll(FS_MEETINGS, 100, Meeting.class);
 	}
@@ -61,11 +70,6 @@ public class MeetingService {
 		this.updateInterestRating(ratings, ratingInterestCount, meeting, rating);
 		this.updatUnderstandabilityRating(ratings, ratingUnderstandabilityCount, meeting, rating);
 		this.updateCostBenefitRating(ratings, ratingCostBenefitCount, meeting, rating);
-
-		Comment comment = new Comment();
-		comment.setMeetingId(meeting.getId());
-		comment.setValue("Test Comment " + rating.toString());
-		meeting.getComments().add(comment);
 
 		this.storeMeeting(meeting);
 		return rating.getId();

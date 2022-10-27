@@ -6,6 +6,11 @@ public class Comment {
 	@DocumentId
 	private String id;
 
+	private String meetingId;
+	private String value;
+	private int upvotes;
+	private int downvotes;
+
 	public String getId() {
 		return this.id;
 	}
@@ -46,8 +51,4 @@ public class Comment {
 		this.downvotes = downvotes;
 	}
 
-	private String meetingId;
-	private String value;
-	private int upvotes;
-	private int downvotes;
 }
