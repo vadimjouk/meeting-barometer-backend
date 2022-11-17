@@ -114,7 +114,7 @@ public class MeetingService {
 
 	private void updateInterestRating(List<Rating> ratings, long ratingInterestCount, final Meeting meeting, final Rating rating) {
 		meeting.setRatingInterest1(0);
-		meeting.setRatingOverall2(0);
+		meeting.setRatingInterest2(0);
 		meeting.setRatingInterest3(0);
 		meeting.setRatingInterest4(0);
 		meeting.setRatingInterest5(0);
