@@ -107,7 +107,7 @@ public class MeetingService {
 			}
 		});
 
-		Double ratingOverallAvg = ratings.stream().mapToInt(r -> r.getRatingOverall() * 20).average().orElse(0);
+		Double ratingOverallAvg = ratings.stream().filter(r -> r.getRatingOverall() > 0).mapToInt(r -> r.getRatingOverall() * 20).average().orElse(0);
 		meeting.setRatingOverallCount(Long.valueOf(ratingOverallCount).intValue());
 		meeting.setRatingOverallAvg(ratingOverallAvg.intValue());
 	}
