@@ -8,7 +8,7 @@
 	<artifactId>mb-backend</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>mb-backend</name>
-	<description>MB Backend</description>
+	<description>Meeting Barometer Backend</description>
 
 	<properties>		
 		<camel.version>3.15.0</camel.version>
